@@ -27,6 +27,7 @@ def parseLichessStudy(pgn: str):
                 attr, value = r.group(1), r.group(2)
                 matches[matchName][attr] = value
         matches[matchName]["Length"] = getMatchLength(lines[-1])
+        matches[matchName]["Site"] = matches[matchName]["Site"][20:]
 
     return matches
 
@@ -46,7 +47,7 @@ def generateWikicode(parsedPgns) -> str:
             finished=""
         matchStr = \
 """|{{Match
-    |date={{\\#var:rounddate}}
+    |date={{#var:rounddate}}
     |finished=%s
     |opponent1={{1Opponent|%s|flag=}}
     |opponent2={{1Opponent|%s|flag=}}
